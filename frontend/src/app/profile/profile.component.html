@@ -1,0 +1,201 @@
+<div class="photo-container"> 
+        <!-- Sidebar Section-->
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <!-- <img src="images/logo.png"> -->
+                    <h2>Wander<span class="danger">Lust</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        travels
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a routerLink="/home">
+                    <span class="material-icons-sharp">
+                        Home
+                    </span>
+                    
+                </a>
+                <a  [routerLink]="['/destination/index']">
+                    <span class="material-icons-sharp">
+                        Destinations
+                    </span>
+                    
+                </a>
+                <a  [routerLink]="['/hotels']">
+                    <span class="material-icons-sharp">
+                        Hotels
+                    </span>
+                  
+                </a>
+                <a  [routerLink]="['/flight']">
+                    <span class="material-icons-sharp">
+                        Flights
+                    </span>
+                </a>
+                <!-- <a href="#">
+                    <span class="material-icons-sharp">
+                        Attractions
+                    </span>
+                  
+                </a> -->
+                <a  [routerLink]="['/travel-packages']">
+                    <span class="material-icons-sharp">
+                        Travel Packages
+                    </span>
+                    
+                </a>
+                <!-- <a href="#">
+                    <span class="material-icons-sharp">
+                        Custom Packages
+                    </span>
+                    
+                </a> -->
+
+
+                <a *ngIf="admin" routerLink="/admin/destination">
+                    <span class="material-icons-sharp">
+                        Add Destination
+                    </span>
+                   
+                </a>
+                <a *ngIf="admin" routerLink="/admin/attraction">
+                    <span class="material-icons-sharp">
+                        Add Attraction
+                    </span>
+                   
+                </a>
+                <a *ngIf="admin" routerLink="/admin/hotels">
+                    <span class="material-icons-sharp">
+                        Add Hotel
+                    </span>
+                   
+                </a>
+                <a *ngIf="admin" routerLink="/admin/travel-package">
+                    <span class="material-icons-sharp">
+                        Add Travel Package
+                    </span>
+                   
+                </a>
+
+                <!-- <a *ngIf="admin" routerLink="/admin/hotel">
+                    <span class="material-icons-sharp">
+                        Add Hotel
+                    </span>
+                   
+                </a> -->
+                <a *ngIf="admin" routerLink="/admin/airline">
+                    <span class="material-icons-sharp">
+                        Add Airline
+                    </span>
+                   
+                </a>
+                <a *ngIf="!admin" routerLink="/cart">
+                    <span class="material-icons-sharp">
+                        My Cart
+                    </span>
+                   
+                </a>
+                <!-- <a  [routerLink]="['/register']">
+                    <span class="material-icons-sharp">
+                        regiater
+                    </span>
+                </a> -->
+                <!-- <a href="#">
+                    <span class="material-icons-sharp">
+                        Logout
+                    </span>
+                </a> -->
+            </div>
+        </aside> 
+        <div class="photo-container2">
+          <span>Welcome to your Travel dashboard</span></div>
+
+          <div class="photo-container3" [ngClass]="{'admin-background': admin, 'user-background': !admin}">
+        </div>
+        
+        
+        <div class="photo-container4">
+            <div [ngClass]="{'admin-pic': admin, 'user-pic': !admin}" class="pic"></div>
+            <div class='info'>
+              <div *ngIf="admin">
+                <h2 class="welcome-header">Welcome admin!</h2>
+              </div>
+            
+              <div *ngIf="!admin">
+                <h2 class="welcome-header">Welcome user!</h2>
+              </div>
+              <h4>User Information</h4>
+              <h2>{{ message }} this is your profile</h2>
+              <h2>Email: {{ email }}</h2>
+              <button (click)="logout()" class="logout-button">Logout</button>
+            </div>
+            <div class="profile-container" *ngIf="!auth">
+              <h2>You're not logged in</h2>
+            </div>
+          </div>
+          
+        <div class="photo-container5">
+          <div *ngIf="!admin" class="container2">
+            <div *ngIf="bookings" class="attraction-container">
+            <h2 style="text-align: center;">Your Travel History</h2><br>
+            <table *ngIf="bookings && bookings.length > 0" class="package-table">
+                <thead>
+                  <tr>
+                    <th>Package</th>
+                    <th>Price</th>
+                    <th>Tour Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Use ngFor to loop through your packages and populate the rows -->
+                  <ng-container *ngFor="let booking of bookings">
+                    <tr>
+                      <td>{{ booking.travel_package.name }}</td>
+                      <td>${{ booking['payment info'] }}</td>
+                      <td>{{ booking.travel_package.departure_flight.departure | slice:0:10 }}</td>
+
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            <div *ngIf="admin" class="container2">
+                <div *ngIf="reviews" class="attraction-container">
+                <h2 style="text-align: center;">Package Reviews</h2><br>
+                <table *ngIf="reviews && reviews.length > 0" class="package-table">
+                    <thead>
+                      <tr>
+                        <th>Package Name</th>
+                        <th>User</th>
+                        <th>Ratings</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Use ngFor to loop through your packages and populate the rows -->
+                      <ng-container *ngFor="let review of reviews">
+                        <tr>
+                          <td>{{ review.travel.name }}</td>
+                          <td>{{ review.user.name}}</td>
+                          <td>{{ review.ratings }}</td>
+    
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+            <!-- <div class="semi-transparent-box">
+              <span class="step">Step 4</span>
+              <h1>Enjoy your favourite destination.</h1>
+            </div> -->
+          </div>
+          
+        </div>
+        
+   

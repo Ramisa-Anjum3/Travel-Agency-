@@ -1,0 +1,124 @@
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Total Number of Tourists</h1>
+      </div>
+      <div class="modal-body">
+        <input type="number" id="quantityInput" [(ngModel)]="quantity" name="quantity" min="1" required class="col-12">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close-btn" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary modal-add-to-cart-btn" data-bs-dismiss="modal" (click)="addToCart()">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div>
+  <app-navbar></app-navbar>
+<body>
+
+    <div class="photo-container">
+    <img src="" alt="">
+    <div class="container" style="overflow: auto;">
+        <div class="profile-container">
+            <div class="card">
+                <div class="card-content">
+                  <img [src]="image.path" alt="" class="card-image">
+                </div>
+            </div>
+            <div class="card1">
+                <div class="card-content1"> 
+                <h1>Package Profile:</h1>
+                <h2>Name: {{package.name}}</h2>
+                <h2>Price: {{package.price}}</h2>
+                <div *ngIf="auth">
+                  <div>
+    
+                    <!-- Star rating input -->
+            <!-- <div>
+              <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" (click)="onStarClick(star)">
+                {{ star <= (selectedRating ?? 0) ? '★' : '☆' }}
+              </span>
+              
+            </div>
+             -->
+            <!-- Submit button -->
+            <!-- <button class="btn btn-primary" (click)="submitRating()">Submit Rating</button> -->
+                  </div>
+                </div>
+                <div *ngIf="averageRating !== null">
+                  <h4>Rating:</h4>
+                  <div class="star-container1">
+                    <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star">
+                      <span [innerHTML]="star <= (averageRating ) ? '★' : '☆'"></span>
+                    </span>
+                  </div>
+                </div>
+                
+      
+                
+                <button *ngIf="auth && !admin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Add to Cart
+                </button>
+                <button *ngIf="admin" type="button" class="btn btn-primary" (click)="Delete(package.id)">
+                  Delete
+                </button>
+                <!-- <button *ngIf="admin" type="button" class="btn btn-delete"  (click)="Delete(package.id)" >
+                  Delete
+                </button> -->
+                
+                <button *ngIf="!auth" class="btn btn-primary" type="button" routerLink="/login">Login in to book</button>
+                </div>
+            </div>
+            <div class="card2">
+                <h2>Description:</h2>
+                <div class="card-content2"> 
+                    <h4>{{package.description}}</h4>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-box">
+          <button class="secondary" (click)="toggleDescriptionDropdown()">Show Details ▼</button>
+          <div *ngIf="showDescriptionDropdown" class="description-dropdown-box">
+            <h3 class="pointer" (click)="goToDestinationProfile(package.destination.id)">Destination: {{package.destination.country}}, {{package.destination.city}}</h3>
+            <h3>Airline: {{package.airline.name}}</h3>
+            <h3 class="pointer" (click)="goToHotelProfile(package.hotel.id)">Hotel: {{package.hotel.name}}</h3>
+            <h3>Departure time: {{package.departure_flight.departure}}</h3>
+            <h3>Return Time: {{package.return_flight.departure}}</h3>
+            <h3> Duration of Package: {{duration}}</h3> 
+            <h3>Price: {{package.price}}</h3>
+            <small>*Rates are for single person. For each aditional person, the price goes up by 200 USD</small>
+          </div>
+          <button *ngIf="auth && !admin"  class="secondary" (click)="toggleDescriptionDropdown2()">Want to Rate ▼</button>
+          <div *ngIf="showDescriptionDropdown2" class="description-dropdown-box">
+            <h2>Rate this package</h2>
+            <div class="star-container">
+              <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" (click)="onStarClick(star)">
+                <span [innerHTML]="star <= (selectedRating ?? 0) ? '★' : '☆'"></span>
+              </span>
+            </div>
+            
+            
+            
+            <!-- Submit button -->
+            <button class="btn btn-primary" (click)="submitRating()">Submit Rating</button>
+                 
+            
+          </div>
+        </div>
+        
+    </div>
+   
+    </div>
+</body>
+</div>
+
+
+    
+
+    
